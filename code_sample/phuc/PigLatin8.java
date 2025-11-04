@@ -14,7 +14,7 @@ public class PigLatin
         String vowels = "aeiou";
         if (vowels.indexOf(word.charAt(0)) != -1) 
         {
-            return word + "ay"; // starts with vowel
+            return word + "ay"; 
         } 
         else if (word.charAt(0) == 'y') 
         {
@@ -42,3 +42,4 @@ public class PigLatin
         }
     }
 }
+
