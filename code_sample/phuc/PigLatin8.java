@@ -10,7 +10,7 @@ public class PigLatin
         System.out.println("Pig Latin: " + pigLatinWord);
     }
     public static String convertToPigLatin(String word) 
-        {
+    {
         String vowels = "aeiou";
         if (vowels.indexOf(word.charAt(0)) != -1) 
         {
@@ -23,7 +23,7 @@ public class PigLatin
         else {
             int index = -1;
             for (int i = 1; i < word.length(); i++) 
-                {
+            {
                 char ch = word.charAt(i);
                 if (vowels.indexOf(ch) != -1 || ch == 'y') 
                 {
@@ -31,7 +31,6 @@ public class PigLatin
                     break;
                 }
             }
-
             if (index == -1) 
             {
                 return word + "ay";
@@ -42,4 +41,3 @@ public class PigLatin
         }
     }
 }
-
