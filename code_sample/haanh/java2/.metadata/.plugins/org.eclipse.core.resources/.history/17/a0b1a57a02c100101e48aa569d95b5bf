@@ -1,0 +1,117 @@
+package chap9_ex1a;
+
+/**
+ * Lớp ElectricBlanket kế thừa từ Blanket và thêm các tính năng
+ * về cài đặt nhiệt và tự động tắt.
+ */
+public class ElectricBlanket extends Blanket {
+
+    // --- Các trường (Fields) mới ---
+    private int numSettings;
+    private boolean hasShutoff;
+
+    // --- Các hằng số (Constants) mới ---
+    private static final int DEFAULT_SETTINGS = 1;
+    private static final int MAX_SETTINGS = 5;
+    private static final double SHUTOFF_PREMIUM = 5.75;
+
+    /**
+     * Hàm dựng (Constructor)
+     * Gọi hàm dựng của lớp cha (super()) và thiết lập các giá trị mặc định
+     * cho các trường của lớp con.
+     */
+    public ElectricBlanket() {
+        super(); // Tự động gọi hàm dựng Blanket()
+        this.numSettings = DEFAULT_SETTINGS;
+        this.hasShutoff = false;
+        // Giá ban đầu (30.0) đã được thiết lập bởi super()
+    }
+
+    // --- Các phương thức Get/Set ---
+
+    public int getNumSettings() {
+        return numSettings;
+    }
+
+    /**
+     * Thiết lập số cài đặt nhiệt.
+     * Chỉ chấp nhận giá trị từ 1 đến 5.
+     */
+    public void setNumSettings(int settings) {
+        if (settings >= 1 && settings <= MAX_SETTINGS) {
+            this.numSettings = settings;
+        } else {
+            // Nếu không hợp lệ, sử dụng giá trị mặc định
+            this.numSettings = DEFAULT_SETTINGS;
+        }
+    }
+
+    public boolean isHasShutoff() {
+        return hasShutoff;
+    }
+
+    /**
+     * Thiết lập tính năng tự động tắt.
+     * Kích hoạt việc tính toán lại giá để cộng thêm phụ phí.
+     */
+    public void setHasShutoff(boolean hasShutoff) {
+        this.hasShutoff = hasShutoff;
+        // Gọi updatePrice() để tính lại giá (thêm 5.75 nếu hasShutoff là true)
+        updatePrice();
+    }
+    
+    // --- Ghi đè (Override) các phương thức ---
+
+    /**
+     * Ghi đè phương thức updatePrice của lớp cha.
+     * Nó gọi phương thức của cha trước, sau đó cộng thêm phụ phí tự động tắt.
+     */
+    @Override
+    protected void updatePrice() {
+        // 1. Chạy logic tính giá của cha (size + material)
+        super.updatePrice();
+        
+        // 2. Cộng thêm phụ phí của lớp con (nếu có)
+        if (this.hasShutoff) {
+            // 'this.price' có thể truy cập được vì nó là 'protected'
+            this.price += SHUTOFF_PREMIUM;
+        }
+    }
+
+    /**
+     * Ghi đè phương thức resetToDefaults của lớp cha.
+     * Nó gọi phương thức của cha, sau đó reset các trường của lớp con.
+     */
+    @Override
+    protected void resetToDefaults() {
+        // 1. Reset các trường của cha (size, color, material, price)
+        super.resetToDefaults();
+        
+        // 2. Reset các trường của riêng lớp con
+        this.numSettings = DEFAULT_SETTINGS;
+        this.hasShutoff = false;
+    }
+
+    /**
+     * Ghi đè phương thức toString của lớp cha.
+     * Nó gọi phương thức của cha, sau đó nối thêm thông tin của lớp con.
+     */
+    @Override
+    public String toString() {
+        // 1. Lấy chuỗi mô tả từ lớp cha (Blanket)
+        String parentString = super.toString();
+        
+        // 2. Thêm thông tin của ElectricBlanket
+        String shutoffStatus;
+        if (this.hasShutoff) {
+            shutoffStatus = "Có";
+        } else {
+            shutoffStatus = "Không";
+        }
+
+        // 3. Trả về chuỗi kết hợp
+        return parentString +
+               "\n\tCài đặt nhiệt: " + this.numSettings +
+               "\n\tTự động tắt: " + shutoffStatus;
+    }
+}

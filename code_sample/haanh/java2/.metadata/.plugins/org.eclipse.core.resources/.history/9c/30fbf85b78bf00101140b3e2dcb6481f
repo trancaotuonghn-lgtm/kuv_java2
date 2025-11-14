@@ -1,0 +1,47 @@
+package chap9_ex1a;
+
+public class Blanket {
+	private String size;
+	private String color;
+	private String material;
+	private double price;
+	
+	private static final double base_price = 30.00;
+    private static final double double_price = 10.00;
+    private static final double queen_price = 25.00;
+    private static final double king_price = 40.00;
+    private static final double wool_price = 20.00;
+    private static final double casmere_price = 45.00;
+	
+    public Blanket() {
+        resetToDefaults();
+    }
+
+    private void resetToDefaults() {
+        this.size = "Twin";
+        this.color = "white";
+        this.material = "cotton";
+        this.price = base_price;
+    }
+	
+	public void setSize(String size) {
+		if (size.equalsIgnoreCase("Twin") ||
+	            size.equalsIgnoreCase("Double") ||
+	            size.equalsIgnoreCase("Queen") ||
+	            size.equalsIgnoreCase("King")) {
+	            
+	            this.size = size;
+	            updatePrice();
+	        } else {
+	            resetToDefaults();
+	        }
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	public void setMaterial(String material) {
+		this.material = material;
+	}	
+}
