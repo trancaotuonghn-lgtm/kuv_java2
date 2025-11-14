@@ -1,0 +1,84 @@
+package chap9_ex1a;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class DemoBlankets {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final String SENTINEL = "exit"; 
+
+        System.out.println("--- TESTING BLANKET CLASS ---");
+        Blanket basicBlanket = new Blanket();
+        System.out.println("Starting values:");
+        System.out.println(basicBlanket.toString());
+        System.out.println("----------------------------------------------");
+
+        String materialInput = "";
+        String sizeInput = "";
+
+        while (true) {
+            System.out.print("\nEnter material (cotton, wool, cashmere) or '" + SENTINEL + "' to stop: ");
+            materialInput = scanner.nextLine();
+            if (materialInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            basicBlanket.setMaterial(materialInput);
+            System.out.println("Values after setting material:");
+            System.out.println(basicBlanket.toString());
+
+            System.out.print("\nEnter size (Twin, Double, Queen, King) or '" + SENTINEL + "' to stop: ");
+            sizeInput = scanner.nextLine();
+            if (sizeInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            basicBlanket.setSize(sizeInput);
+            System.out.println("Values after setting size:");
+            System.out.println(basicBlanket.toString());
+        }
+
+        System.out.println("\n\n--- TESTING ELECTRICBLANKET CLASS ---");
+        ElectricBlanket electricBlanket = new ElectricBlanket();
+        System.out.println("Starting values:");
+        System.out.println(electricBlanket.toString());
+        System.out.println("-------------------------------------------------------");
+
+        while (true) {
+            System.out.print("\nEnter material (cotton, wool, cashmere) or '" + SENTINEL + "' to stop: ");
+            materialInput = scanner.nextLine();
+            if (materialInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            electricBlanket.setMaterial(materialInput);
+
+            System.out.print("Enter size (Twin, Double, Queen, King) or '" + SENTINEL + "' to stop: ");
+            sizeInput = scanner.nextLine();
+            if (sizeInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            electricBlanket.setSize(sizeInput);
+
+            try {
+                System.out.print("Enter number of heat settings (1-5): ");
+                int settings = scanner.nextInt();
+                electricBlanket.setNumSettings(settings);
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Using default setting of 1.");
+                electricBlanket.setNumSettings(1); 
+            }
+            scanner.nextLine(); 
+
+            System.out.print("Does it have automatic shutoff (y/n)? ");
+            String shutoffInput = scanner.nextLine();
+            boolean hasShutoff = shutoffInput.equalsIgnoreCase("y");
+            electricBlanket.setHasShutoff(hasShutoff);
+
+            System.out.println("\nUpdated ElectricBlanket values:");
+            System.out.println(electricBlanket.toString());
+        }
+
+        System.out.println("\nProgram finished.");
+        scanner.close();
+    }
+}

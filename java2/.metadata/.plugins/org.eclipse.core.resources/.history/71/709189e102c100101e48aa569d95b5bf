@@ -1,0 +1,90 @@
+package chap9_ex1;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class DemoBlankets {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String SENTINEL = "quit"; 
+
+        System.out.println("--- BẮT ĐẦU THỬ NGHIỆM LỚP BLANKET (CHĂN THƯỜNG) ---");
+        Blanket basicBlanket = new Blanket();
+        System.out.println("Giá trị ban đầu:");
+        System.out.println(basicBlanket.toString());
+
+        String materialInput = "";
+        String sizeInput = "";
+
+        while (true) {
+            // 1. Nhập chất liệu
+            System.out.print("\nNhập chất liệu (cotton, wool, cashmere) hoặc '" + SENTINEL + "' để dừng: ");
+            materialInput = scanner.nextLine();
+            if (materialInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            basicBlanket.setMaterial(materialInput);
+            System.out.println("Cập nhật sau khi đổi chất liệu:");
+            System.out.println(basicBlanket.toString());
+
+            // 2. Nhập kích thước
+            System.out.print("\nNhập kích thước (Twin, Double, Queen, King) hoặc '" + SENTINEL + "' để dừng: ");
+            sizeInput = scanner.nextLine();
+            if (sizeInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            basicBlanket.setSize(sizeInput);
+            System.out.println("Cập nhật sau khi đổi kích thước:");
+            System.out.println(basicBlanket.toString());
+        }
+
+        System.out.println("\n\n--- BẮT ĐẦU THỬ NGHIỆM LỚP ELECTRICBLANKET (CHĂN ĐIỆN) ---");
+        ElectricBlanket electricBlanket = new ElectricBlanket();
+        System.out.println("Giá trị ban đầu:");
+        System.out.println(electricBlanket.toString());
+        System.out.println("-------------------------------------------------------");
+
+        while (true) {
+            // 1. Nhập chất liệu
+            System.out.print("\nNhập chất liệu (cotton, wool, cashmere) hoặc '" + SENTINEL + "' để dừng: ");
+            materialInput = scanner.nextLine();
+            if (materialInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            electricBlanket.setMaterial(materialInput);
+
+            // 2. Nhập kích thước
+            System.out.print("Nhập kích thước (Twin, Double, Queen, King) hoặc '" + SENTINEL + "' để dừng: ");
+            sizeInput = scanner.nextLine();
+            if (sizeInput.equalsIgnoreCase(SENTINEL)) {
+                break;
+            }
+            electricBlanket.setSize(sizeInput);
+
+            // 3. Nhập số cài đặt nhiệt
+            try {
+                System.out.print("Nhập số cài đặt nhiệt (1-5): ");
+                int settings = scanner.nextInt();
+                electricBlanket.setNumSettings(settings);
+            } catch (InputMismatchException e) {
+                System.out.println("Đầu vào không hợp lệ. Sử dụng mặc định 1.");
+                electricBlanket.setNumSettings(1); // Dùng mặc định
+            }
+            scanner.nextLine(); 
+
+            // 4. Nhập tính năng tự động tắt
+            System.out.print("Có tính năng tự động tắt (c/k)? ");
+            String shutoffInput = scanner.nextLine();
+            boolean hasShutoff = shutoffInput.equalsIgnoreCase("c");
+            electricBlanket.setHasShutoff(hasShutoff);
+
+            // 5. Hiển thị kết quả cuối cùng của vòng lặp
+            System.out.println("\nCập nhật chăn điện:");
+            System.out.println(electricBlanket.toString());
+        }
+
+        System.out.println("\nChương trình kết thúc.");
+        scanner.close();
+    }
+}

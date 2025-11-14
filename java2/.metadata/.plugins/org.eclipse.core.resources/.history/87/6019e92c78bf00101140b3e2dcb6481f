@@ -1,0 +1,73 @@
+package chap9_practice;
+
+//Write a Java program to create an interface CalculateShape with the getArea() method. 
+//Create three classes Rectangle, Circle, and Triangle that implement the CalculateShape interface. 
+//Implement the getArea() method for each of the three classes.
+
+interface CalculateShape {
+	public double getArea();
+}
+
+class Rectangle implements CalculateShape{
+	 double length;
+	 double width;
+	 
+	 public Rectangle(double length, double width) {
+		 this.length = length;
+		 this.width = width;
+	 }
+	@Override
+	public double getArea() {
+//		double result = length*width;
+//		System.out.println("The Rectangle CalculateShape: " + result);
+		return length*width;
+	}
+	
+	
+}
+class Circle implements CalculateShape {
+	double radius;
+	double PI = Math.PI;
+	
+	public Circle(double radius) {
+		this.radius = radius;
+	}
+	@Override
+	public void getArea() {
+		double result = PI*radius*radius;
+		System.out.println("The Circle CalculateShape: " + result);
+		
+	}
+}
+
+class Triangle implements CalculateShape{
+	
+	double base;
+	double height;
+	
+	public Triangle(double base, double height) {
+		this.base = base;
+		this.height = height;
+	}
+	
+	@Override
+	public void getArea() {
+		double result = (base*height)/2;
+		System.out.println("The Triangle CalculateShape" + result );
+	}
+	
+}
+ 
+public class CalculateShape {
+
+	public static void main(String[] args) {
+		Rectangle rec = new Rectangle(1.5, 2.3);
+		Circle cir = new Circle(2.4);
+		Triangle tri = new Triangle(1.5, 5);
+		rec.getArea();
+		cir.getArea();
+		tri.getArea();
+	}
+
+}
+
