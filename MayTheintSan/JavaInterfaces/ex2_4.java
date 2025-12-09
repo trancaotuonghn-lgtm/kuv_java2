@@ -31,7 +31,7 @@ public class Bank {
      
      // Use interface methods
      sa.deposit(200.00);
-     ca.withdraw(1500.00); // This should dip into overdraft
+     ca.withdraw(1500.00); 
      
      // Calculate interest/fees
      sa.calculateInterest();
