@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class DemoBlankets {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final String SENTINEL = "QUIT";
+
+        // Demo Standard Blanket
+        
+        
+        System.out.println("          STANDARD BLANKET DEMO          ");
+        
+        
+        Blanket blanket = new Blanket();
+        System.out.println("Starting Values:\n" + blanket);
+
+        String input;
+        
+        // Loop for Blanket
+        do {
+            // Get Material
+            System.out.print("\nEnter Blanket material (Wool, Cashmere, Cotton, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+            
+            blanket.setMaterial(input);
+            System.out.println("After Material Change:\n" + blanket);
+            
+            // Get Size
+            System.out.print("\nEnter Blanket size (Twin, Double, Queen, King, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+            
+            blanket.setSize(input);
+            System.out.println("After Size Change:\n" + blanket);
+            
+        } while (true);
+
+        // Demo Electric Blanket 
+
+        
+        System.out.println("         ELECTRIC BLANKET DEMO           ");
+       
+        
+        ElectricBlanket electricBlanket = new ElectricBlanket();
+        System.out.println("Starting Values (Inherited Defaults):\n" + electricBlanket);
+        
+        // Loop for ElectricBlanket
+        do {
+            // Get Material
+            System.out.print("\nEnter Electric Blanket material (Wool, Cashmere, Cotton, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+            
+            electricBlanket.setMaterial(input);
+            System.out.println("After Material Change:\n" + electricBlanket);
+            
+            // Get Size
+            System.out.print("\nEnter Electric Blanket size (Twin, Double, Queen, King, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+            
+            electricBlanket.setSize(input);
+            System.out.println("After Size Change:\n" + electricBlanket);
+            
+            // Get Heat Settings
+            System.out.print("\nEnter heat settings (1-5, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+
+            try {
+                int settings = Integer.parseInt(input);
+                electricBlanket.setHeatSettings(settings);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Settings not changed.");
+            }
+            System.out.println("After Settings Change:\n" + electricBlanket);
+            
+            // Get Auto Shutoff
+            System.out.print("\nDoes it have auto shutoff? (Y/N, or QUIT to stop): ");
+            input = scanner.nextLine().toUpperCase();
+            if (input.equals(SENTINEL)) break;
+
+            if (input.startsWith("Y")) {
+                electricBlanket.setHasAutoShutoff(true);
+            } else if (input.startsWith("N")) {
+                electricBlanket.setHasAutoShutoff(false);
+            }
+            System.out.println("After Auto Shutoff Change:\n" + electricBlanket);
+            
+        } while (true);
+
+        scanner.close();
+        System.out.println("\nProgram finished. ");
+    }
+}
