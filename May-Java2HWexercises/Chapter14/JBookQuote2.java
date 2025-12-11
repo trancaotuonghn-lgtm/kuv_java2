@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class JBookQuote2 extends JFrame implements ActionListener{
  
     private JLabel quoteLabel = new JLabel("Life is a long lesson in humility");
-    
+     
     private final String BOOK_TITLE = "The Little Minister";
     private final String AUTHOR = "James M. Barrie";
 
